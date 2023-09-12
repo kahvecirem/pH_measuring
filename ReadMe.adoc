@@ -1,0 +1,70 @@
+:Author: kahvecirem
+:Email: {kahveciiirem@gmail.com}
+:Date: 01/09/2018
+:Revision: version#
+:License: TUBITAK
+
+= Project: {Arduino pH-Controlled Pitcher Project 2204 TUBITAK PROJECT // 2018}
+
+This is a simple Arduino code for interfacing a pH sensor and displaying the pH value on an LCD screen. It also provides a visual indication on the LCD screen and sends the pH value to the serial monitor.
+
+Components Required
+Arduino board
+Liquid Crystal Display (LCD)
+pH sensor
+Jumper wires
+Arduino Connections
+Connect the pH sensor to analog pin A0.
+Connect the LCD to the following pins:
+LCD RS pin to digital pin 12
+LCD Enable pin to digital pin 11
+LCD D4 pin to digital pin 5
+LCD D5 pin to digital pin 4
+LCD D6 pin to digital pin 3
+LCD D7 pin to digital pin 2
+
+#include <LiquidCrystal.h>
+
+// Define the LCD
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Define the pH sensor pin
+const int sensorPin = A0;
+
+void setup() {
+  // Initialize the LCD
+  lcd.begin(16, 2);
+
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the value from the pH sensor
+  int sensorValue = analogRead(sensorPin);
+
+  // Calculate pH value
+  float pH = map(sensorValue, 0, 1023, 0, 14.00);
+
+  // Clear the LCD and set cursor to the first position
+  lcd.clear();
+  lcd.setCursor(0, 0);
+
+  if (pH >= 6.5 && pH <= 8.5) {
+    lcd.print("Enjoy!");
+    lcd.setCursor(0, 1);
+    lcd.print(":)");
+  } else {
+    lcd.print("Do Not Drink!");
+    lcd.setCursor(0, 1);
+    lcd.print(":(");
+  }
+
+  // Display pH value on the serial port
+  Serial.print("pH: ");
+  Serial.println(pH);
+
+  // Wait for a moment
+  delay(1000);
+}
+This Arduino code initializes the LCD and pH sensor, reads the pH value, and displays a message on the LCD based on the pH value. If the pH is within the range 6.5 to 8.5, it displays "Enjoy!" with a smiley face; otherwise, it displays "Do Not Drink!" with a sad face. The pH value is also sent to the serial monitor.
