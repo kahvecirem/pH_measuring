@@ -1,7 +1,5 @@
-# pH_measuring
-Arduino pH-Controlled Pitcher Project. TUBITAK PROJECT
 
-# Arduino pH-Controlled Pitcher Project
+# Arduino pH-Controlled Pitcher Project 2204 TUBITAK PROJECT // 2018
 
 ![Project Image](project_image.jpg)
 
